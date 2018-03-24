@@ -1,0 +1,41 @@
+.setupCont .controlRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.setupCont .controlRow div {
+    display: flex;
+    flex-direction: row;
+}
+
+.setupCont .controlRow div p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.setupCont input {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: inherit;
+    outline: none;
+    margin: 0 5px;
+    font-weight: 300;
+    text-align: right;
+}
+
+.setupCont input::-webkit-inner-spin-button {
+    margin-left: 5px;
+    margin-bottom: -2px;
+    opacity: 1;
+}
+
+.setupCont input:last-of-type {
+    margin-right: 0;
+}

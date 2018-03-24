@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import rootReducer from "./reducers";
 import AppContainer from "./containers/AppContainer";
+import "./index.css";
 
 const INITIAL_STATE = {
     gameData: null,

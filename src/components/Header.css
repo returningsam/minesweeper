@@ -1,0 +1,13 @@
+header {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols),var(--col-width));
+}
+
+header h1 {
+    line-height: 50px;
+    grid-column: 1 / 2;
+    margin-left: -4px;
+    white-space: nowrap;
+}

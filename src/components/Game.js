@@ -1,8 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import "./Game.css";
 
-const Game = (gameData) => (
-    <div>
+const Game = (gameData, gameReady) => (
+    <div className={"gameCont card " + (gameReady ? "front" : "back")}>
         {JSON.stringify(gameData)}
     </div>
 );
@@ -10,7 +11,8 @@ const Game = (gameData) => (
 Game.propTypes = {
     gameData: PropTypes.arrayOf(
         PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
-    ).isRequired
+    ),
+    gameReady: PropTypes.bool.isRequired
 }
  
 export default Game;

@@ -3,7 +3,8 @@ import Game from "../components/Game";
 import { gameEnd, selectSquare } from "../actions";
 
 const mapStateToProps = state => ({
-    gameData: state.gameData
+    gameData: state.gameData,
+    gameReady: state.gameReady
 });
 
 const mapDispatchToProps = dispatch => ({

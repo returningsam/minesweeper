@@ -5,9 +5,12 @@ import GameContainer from "../containers/GameContainer";
 import Header from "./Header";
 
 const App = (state) => (
-    <div>
+    <div className="grid">
         <Header />
-        {state.gameReady ? <GameContainer/> : <SetupContainer/>}
+        <div className="innerGrid">
+            <SetupContainer/>
+            <GameContainer/>
+        </div>
     </div>
 );
 

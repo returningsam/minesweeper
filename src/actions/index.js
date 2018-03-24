@@ -1,11 +1,18 @@
-let nextTodoId = 0
-
-export const setupSubmit = (width,height,numMines) => {({
-    type: "SETUP_SUBMIT",
+export const updateWidth = (width) => ({
+    type: "UPDATE_GAME_WIDTH",
     width,
-    height,
+});
+
+export const updateHeight = (height) => ({
+    type: "UPDATE_GAME_HEIGHT",
+    height
+});
+
+export const updateNumMines = (numMines) => ({
+    type: "UPDATE_NUM_MINES",
     numMines
-})} 
+});
+
 
 export const selectSquare = (x,y) => ({
     type: "SELECT_SQUARE",
