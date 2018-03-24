@@ -4,11 +4,11 @@ import { gameEnd } from "../actions";
 
 const mapStateToProps = state => ({
     timer: state.timer,
-    numMines: state.timer
+    numMines: state.game.numMines
 });
 
 const mapDispatchToProps = dispatch => ({
-    gameEnd: () => {dispatch(gameEnd)}
+    gameEnd: () => {dispatch(gameEnd())}
 });
 
 export default connect(

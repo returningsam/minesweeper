@@ -63,7 +63,7 @@ h2 {
     font-weight: normal;
 }
 
-.controlsCont {
+.leftCont {
     grid-column: 1 / 2;
     grid-row: 1 / 1;
     border-right: 1px solid black;
@@ -78,6 +78,22 @@ h2 {
     -webkit-box-sizing: border-box;
     font-weight: 300;
     font-size: 1.2rem;
+}
+
+.controlRow.padded {
+    padding: 10px;
+}
+
+.controlRow div {
+    display: flex;
+    flex-direction: row;
+}
+.controlRow p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
 }
 
 .controlLabel {

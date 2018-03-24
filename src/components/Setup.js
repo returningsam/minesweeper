@@ -17,7 +17,7 @@ class NumberField extends React.Component {
 const Setup = (props) => {
     const {width, height, numMines, updateWidth, updateHeight, updateNumMines, handleSubmit} = props;
     return (
-        <form onSubmit={handleSubmit} className="setupCont controlsCont">
+        <form onSubmit={handleSubmit} className="setupCont leftCont">
             <div className="controlRow padded">
                 <NumberField handleChange={updateWidth} label="width" name="width" defaultVal={width} placeholder="x" min="1" max="10"/>
             </div>

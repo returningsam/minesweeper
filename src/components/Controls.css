@@ -1,0 +1,6 @@
+.controlsCont .controlRow {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: space-between;
+}
