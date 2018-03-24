@@ -1,7 +1,10 @@
 .setupCont .controlRow {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    overflow: hidden;
+}
+
+.setupCont .controlRow.padded {
     padding: 10px;
 }
 
@@ -18,7 +21,7 @@
     padding: 0;
 }
 
-.setupCont input {
+.numberInput {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -30,12 +33,41 @@
     text-align: right;
 }
 
-.setupCont input::-webkit-inner-spin-button {
+.numberInput::-webkit-inner-spin-button {
     margin-left: 5px;
     margin-bottom: -2px;
     opacity: 1;
 }
 
-.setupCont input:last-of-type {
+.numberInput::-webkit-inner-spin-button:hover {
+    cursor: pointer;
+}
+
+.numberInput:last-of-type {
     margin-right: 0;
+}
+
+.setupInputCont {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.submitInput {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    border: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    text-align: center;
+}
+
+.submitInput:hover {
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
 }
