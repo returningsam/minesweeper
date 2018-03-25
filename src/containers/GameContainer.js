@@ -1,14 +1,20 @@
 import { connect } from "react-redux";
 import Game from "../components/Game";
-import { gameEnd, selectSquare } from "../actions";
+import { loseGame, selectSquare, startTimer, stopTimer, updateTimer } from "../actions";
 
 const mapStateToProps = state => ({
     gameData: state.game.gameData,
-    gameReady: state.game.gameReady
+    gameStatus: state.game.gameStatus,
+    gameReady: state.game.gameReady,
+    timerActive: state.timer.active
 });
 
 const mapDispatchToProps = dispatch => ({
-    selectSquare: () => {dispatch(selectSquare)}
+    selectSquare: (x,y) => {dispatch(selectSquare(x,y))},
+    loseGame: () => {dispatch(loseGame())},
+    startTimer: () => {dispatch(startTimer())},
+    stopTimer: () => {dispatch(stopTimer())},
+    updateTimer: () => {dispatch(updateTimer())},
 });
 
 export default connect(

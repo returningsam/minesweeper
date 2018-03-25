@@ -1,5 +1,44 @@
 .gameCont {
     grid-column: 2 / 5;
     grid-row: 1 / 1;
-    background-color: #d5d5d5;
+    background-color: rgba(0,0,0,0.1);
+    overflow: scroll;
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: white;
+}
+
+tbody {
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
+    visibility: visible;
+}
+
+tr {
+    /* height: 30.5px; */
+}
+
+td {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 24px;
+    width: 24px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background-color: rgba(0,0,0,0.1);
+}
+
+td.hidden {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0);
+}
+
+td.hover:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.1);
 }

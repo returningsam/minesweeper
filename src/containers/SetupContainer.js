@@ -3,7 +3,6 @@ import Setup from "../components/Setup";
 import { updateWidth, updateHeight, updateNumMines, finalizeSetup } from "../actions";
 
 const mapStateToProps = state => {
-    console.log(state);
     return ({
         gameReady: state.game.gameReady,
         width: state.game.width,
@@ -13,7 +12,6 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    console.log(dispatch);
     return ({
         updateWidth:    (ev) => {dispatch(updateWidth(parseInt(ev.target.value)))},
         updateHeight:   (ev) => {dispatch(updateHeight(parseInt(ev.target.value)))},

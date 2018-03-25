@@ -17,22 +17,22 @@ class NumberField extends React.Component {
 const Setup = (props) => {
     const {width, height, numMines, updateWidth, updateHeight, updateNumMines, handleSubmit} = props;
     return (
-        <form onSubmit={handleSubmit} className="setupCont leftCont">
+        <div className="setupCont leftCont">
             <div className="controlRow padded">
-                <NumberField handleChange={updateWidth} label="width" name="width" defaultVal={width} placeholder="x" min="1" max="10"/>
+                <NumberField handleChange={updateWidth} label="width" name="width" defaultVal={width} placeholder="x" min="5" max="20"/>
             </div>
             <div className="controlRow padded">
-                <NumberField handleChange={updateHeight} label="height" name="height" defaultVal={height} placeholder="y" min="1" max="10"/>
+                <NumberField handleChange={updateHeight} label="height" name="height" defaultVal={height} placeholder="y" min="5" max="20"/>
             </div>
             <div className="controlRow padded">
-                <NumberField handleChange={updateNumMines} label="number of mines" name="numMines" defaultVal={numMines} placeholder="&#9187;" min="1" max="10"/>
+                <NumberField handleChange={updateNumMines} label="number of mines" name="numMines" defaultVal={numMines} placeholder="&#9187;" min="2" max="15"/>
             </div>
             <div className="controlRow">
                 <div className="setupInputCont">
-                    <input className="submitInput" value="start" type="submit" name="submit"/>
+                    <p onClick={handleSubmit} className="submitInput"  type="submit" name="submit">start</p>
                 </div>
             </div>
-        </form>
+        </div>
     );
 }
 

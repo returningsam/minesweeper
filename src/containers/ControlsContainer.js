@@ -1,14 +1,21 @@
 import { connect } from "react-redux";
 import Controls from "../components/Controls";
-import { gameEnd } from "../actions";
+import { loseGame, newGame, stopTimer, resetTimer } from "../actions";
 
-const mapStateToProps = state => ({
-    timer: state.timer,
-    numMines: state.game.numMines
-});
+const mapStateToProps = state => {
+    return ({
+        timer: state.timer,
+        numMines: state.game.numMines,
+        gameStatus: state.game.gameStatus,
+        gameStatusMessage: state.game.gameStatusMessage
+    });
+}
 
 const mapDispatchToProps = dispatch => ({
-    gameEnd: () => {dispatch(gameEnd())}
+    loseGame: () => {dispatch(loseGame())},
+    newGame: () => {dispatch(newGame())},
+    resetTimer: () => {dispatch(resetTimer())},
+    stopTimer: () => {dispatch(stopTimer())}
 });
 
 export default connect(
