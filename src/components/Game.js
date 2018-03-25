@@ -16,6 +16,10 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
         this.handleSelectSquare = this.handleSelectSquare.bind(this);
+        this.state = {
+            dieSound: new Audio('die.mp3'),
+            wooSound: new Audio('woo.mp3'),
+        };
         this.handleFlagSquare = this.handleFlagSquare.bind(this);
     }
     handleSelectSquare (ev) {
@@ -26,6 +30,7 @@ class Game extends React.Component {
         var y = parseInt(toks[1]);
         if (!gameData[y][x].hidden || gameData[y][x].flag) return;
         if (gameData[y][x].mine) {
+            this.state.dieSound.play();
             stopTimer();
             loseGame();
         }
@@ -46,14 +51,14 @@ class Game extends React.Component {
 
         timerActive = timerActive || (gameStatus == 0);
 
-        if (timerActive && !timerUpdateInterval) {
-            console.log("started");
+        if (timerActive && !timerUpdateInterval)
             timerUpdateInterval = setInterval(updateTimer, 100);
-        }
         else if (!timerActive && timerUpdateInterval) {
             clearInterval(timerUpdateInterval);
             timerUpdateInterval = false;
         }
+
+        if (gameStatus == 1) this.state.wooSound.play();
 
         return (
             <div className={"gameCont card " + (gameReady ? "front" : "back")}>

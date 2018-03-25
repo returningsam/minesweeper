@@ -101,7 +101,6 @@ const game = (state = INITIAL_STATE.game, action) => {
             numMines: action.num
         });
     case FINALIZE_SETUP:
-        console.log(((state.width*state.height) - state.numMines));
         return Object.assign({}, state, {
             gameReady: true,
             gameData: buildGameBoard(state.width,state.height,state.numMines),
@@ -140,6 +139,7 @@ const game = (state = INITIAL_STATE.game, action) => {
 
         var numFlagsLeft = state.numFlagsLeft;
         var numMinesLeft = state.numMinesLeft;
+
         if (tempData[action.y][action.x].flag) {
             tempData[action.y][action.x].flag = false;
             numFlagsLeft++;
@@ -150,8 +150,6 @@ const game = (state = INITIAL_STATE.game, action) => {
             numFlagsLeft--;
             if (tempData[action.y][action.x].mine) numMinesLeft--;
         }
-
-        console.log(numFlagsLeft,numMinesLeft);
 
         var status = (numMinesLeft > 0 ? 0 : 1);
         var statusMessage = ((numMinesLeft > 0) ? getRandSafeMessage() : "you win!");

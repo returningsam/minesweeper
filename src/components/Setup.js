@@ -16,6 +16,7 @@ class NumberField extends React.Component {
 
 const Setup = (props) => {
     const {width, height, numMines, updateWidth, updateHeight, updateNumMines, handleSubmit} = props;
+    const startingSound = new Audio("starting.mp3");
     return (
         <div className="setupCont leftCont">
             <div className="controlRow padded">
@@ -29,7 +30,7 @@ const Setup = (props) => {
             </div>
             <div className="controlRow">
                 <div className="setupInputCont">
-                    <p onClick={handleSubmit} className="submitInput"  type="submit" name="submit">start</p>
+                    <p onClick={() => {startingSound.play();handleSubmit()}} className="submitInput"  type="submit" name="submit">start</p>
                 </div>
             </div>
         </div>

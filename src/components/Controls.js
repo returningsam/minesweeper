@@ -16,10 +16,14 @@ const Timer = (props) => {
 class Controls extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            giveupSound: new Audio("giveup.mp3")
+        }
         this.giveUpHandler = this.giveUpHandler.bind(this);
         this.newGameHandler = this.newGameHandler.bind(this);
     }
     giveUpHandler () {
+        this.state.giveupSound.play();
         this.props.stopTimer();
         this.props.loseGame();
     }
