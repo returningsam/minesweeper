@@ -1,4 +1,4 @@
-import {UPDATE_GAME_WIDTH, UPDATE_GAME_HEIGHT, UPDATE_NUM_MINES, SELECT_SQUARE, NEW_GAME, LOSE_GAME, FINALIZE_SETUP} from "../actions";
+import {UPDATE_GAME_WIDTH, UPDATE_GAME_HEIGHT, UPDATE_NUM_MINES, SELECT_SQUARE, FLAG_SQUARE, NEW_GAME, LOSE_GAME, FINALIZE_SETUP} from "../actions";
 import {INITIAL_STATE, randInt} from "../constants";
 
 const defaultSquare = (x,y) => ({
@@ -14,7 +14,12 @@ const getRandSafeMessage = () => {
     const options = [
         "phew, that was close",
         "so far, so good",
-        "this is too much man"
+        "this is too much, man",
+        "my heart is racing",
+        "just give up already",
+        "ahhhhhhhhh!",
+        "i'm shook",
+        "watch out!"
     ];
     return options[randInt(0,options.length-1)];
 }
@@ -100,28 +105,63 @@ const game = (state = INITIAL_STATE.game, action) => {
         return Object.assign({}, state, {
             gameReady: true,
             gameData: buildGameBoard(state.width,state.height,state.numMines),
-            gameStatus: true,
+            gameStatus: 0,
             numLeft: ((state.width*state.height) - state.numMines),
-            gameStatusMessage: getRandSafeMessage()
+            numMinesLeft: state.numMines,
+            numFlagsLeft: state.numMines,
+            gameStatusMessage: "whenever you're ready"
         });
     case SELECT_SQUARE:
-        if (!state.gameData[action.y][action.x].hidden) return state;
-        
         var tempData = state.gameData.map(function(arr) {return arr.slice()});
 
         var numRemoved = 1;
 
         tempData[action.y][action.x].hidden = false;
-        if (tempData[action.y][action.x].numNear == 0) {
-            var temp = expandSelection(action.x,action.y,tempData);
-            console.log(temp);
-            numRemoved += temp.length;
-        }
+        if (tempData[action.y][action.x].numNear == 0)
+            numRemoved += expandSelection(action.x,action.y,tempData).length;
+
+        var numLeft = state.numLeft - numRemoved;
+        var status = (numLeft > 0 ? 0 : 1);
+        var statusMessage = ((numLeft > 0) ? getRandSafeMessage() : "you win!");
+
+        if (status == 1)
+            for (var i = 0; i < tempData.length; i++)
+                for (var j = 0; j < tempData[i].length; j++)
+                    if (tempData[i][j].mine) tempData[i][j].hidden = false;
 
         return Object.assign({}, state, {
             gameData: tempData,
-            gameStatusMessage: getRandSafeMessage(),
-            numLeft: (state.numLeft - numRemoved)
+            numLeft: numLeft,
+            gameStatus: status,
+            gameStatusMessage: statusMessage
+        });
+    case FLAG_SQUARE:
+        var tempData = state.gameData.map(function(arr) {return arr.slice()});
+
+        var numFlagsLeft = state.numFlagsLeft;
+        var numMinesLeft = state.numMinesLeft;
+        if (tempData[action.y][action.x].flag) {
+            tempData[action.y][action.x].flag = false;
+            numFlagsLeft++;
+            if (tempData[action.y][action.x].mine) numMinesLeft++;
+        }
+        else if (numFlagsLeft > 0) {
+            tempData[action.y][action.x].flag = true;
+            numFlagsLeft--;
+            if (tempData[action.y][action.x].mine) numMinesLeft--;
+        }
+
+        console.log(numFlagsLeft,numMinesLeft);
+
+        var status = (numMinesLeft > 0 ? 0 : 1);
+        var statusMessage = ((numMinesLeft > 0) ? getRandSafeMessage() : "you win!");
+
+        return Object.assign({}, state, {
+            gameData: tempData,
+            numFlagsLeft: numFlagsLeft,
+            numMinesLeft: numMinesLeft,
+            gameStatus: status,
+            gameStatusMessage: statusMessage
         });
     case LOSE_GAME:
         var tempData = state.gameData.map(function(arr) {return arr.slice()});
@@ -132,7 +172,7 @@ const game = (state = INITIAL_STATE.game, action) => {
 
         return Object.assign({}, state, {
             gameData: tempData,
-            gameStatus: false,
+            gameStatus: -1,
             gameStatusMessage: "you lose"
         });
     case NEW_GAME:

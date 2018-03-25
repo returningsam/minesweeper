@@ -63,6 +63,13 @@ h2 {
     font-weight: normal;
 }
 
+p {
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: auto;
+}
+
 .leftCont {
     grid-column: 1 / 2;
     grid-row: 1 / 1;

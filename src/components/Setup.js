@@ -25,7 +25,7 @@ const Setup = (props) => {
                 <NumberField handleChange={updateHeight} label="height" name="height" defaultVal={height} placeholder="y" min="5" max="20"/>
             </div>
             <div className="controlRow padded">
-                <NumberField handleChange={updateNumMines} label="number of mines" name="numMines" defaultVal={numMines} placeholder="&#9187;" min="2" max="15"/>
+                <NumberField handleChange={updateNumMines} label="number of mines" name="numMines" defaultVal={numMines} placeholder="100" min="1" max={(width*height) - 1}/>
             </div>
             <div className="controlRow">
                 <div className="setupInputCont">

@@ -18,10 +18,6 @@ tbody {
     visibility: visible;
 }
 
-tr {
-    /* height: 30.5px; */
-}
-
 td {
     border-right: 1px solid black;
     border-bottom: 1px solid black;
@@ -34,7 +30,6 @@ td {
 }
 
 td.hidden {
-    cursor: pointer;
     background-color: rgba(0,0,0,0);
 }
 

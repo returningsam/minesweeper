@@ -4,8 +4,16 @@
     overflow: hidden;
 }
 
+input {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: content-box !important;
+    max-width: calc(1.2rem * 3);
+}
+
 .numberInput {
     height: 100%;
+    width: auto;
     margin: 0;
     padding: 0;
     border: none;
@@ -33,6 +41,7 @@
 .setupInputCont {
     height: 100%;
     width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Game from "../components/Game";
-import { loseGame, selectSquare, startTimer, stopTimer, updateTimer } from "../actions";
+import { loseGame, selectSquare, flagSquare, startTimer, stopTimer, updateTimer } from "../actions";
 
 const mapStateToProps = state => ({
     gameData: state.game.gameData,
@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     selectSquare: (x,y) => {dispatch(selectSquare(x,y))},
+    flagSquare: (x,y) => {dispatch(flagSquare(x,y))},
     loseGame: () => {dispatch(loseGame())},
     startTimer: () => {dispatch(startTimer())},
     stopTimer: () => {dispatch(stopTimer())},

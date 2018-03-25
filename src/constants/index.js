@@ -1,8 +1,11 @@
+export const MINE_CHAR = "⦻";
+export const FLAG_CHAR = "⚐";
+
 export const INITIAL_STATE = {
     game: {
         gameData: null,
         gameReady: false,
-        gameStatus: false,
+        gameStatus: -1,
         gameStatusMessage: "",
         numMines: 5,
         width: 6,

@@ -3,6 +3,7 @@ export const UPDATE_GAME_HEIGHT = "UPDATE_GAME_HEIGHT";
 export const UPDATE_NUM_MINES   = "UPDATE_NUM_MINES";
 export const FINALIZE_SETUP     = "FINALIZE_SETUP";
 export const SELECT_SQUARE      = "SELECT_SQUARE";
+export const FLAG_SQUARE        = "FLAG_SQUARE";
 export const NEW_GAME           = "NEW_GAME";
 export const LOSE_GAME          = "LOSE_GAME";
 export const START_TIMER        = "START_TIMER";
@@ -31,6 +32,12 @@ export const finalizeSetup = () => ({
 
 export const selectSquare = (x,y) => ({
     type: SELECT_SQUARE,
+    x:x,
+    y:y
+});
+
+export const flagSquare = (x,y) => ({
+    type: FLAG_SQUARE,
     x:x,
     y:y
 });

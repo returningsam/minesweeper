@@ -1,28 +1,51 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Game.css";
+import {MINE_CHAR, FLAG_CHAR} from "../constants";
 
 var timerUpdateInterval = false;
+
+const colorOptions = ["black","blue","green","red","purple","black","maroon","grey","turquoise"];
+
+const getNumberColor = (num) => {
+    num = num % colorOptions.length;
+    return colorOptions[num];
+}
 
 class Game extends React.Component {
     constructor(props) {
         super(props);
         this.handleSelectSquare = this.handleSelectSquare.bind(this);
+        this.handleFlagSquare = this.handleFlagSquare.bind(this);
     }
     handleSelectSquare (ev) {
-        if (!timerUpdateInterval) timerUpdateInterval = this.props.startTimer();
+        const { gameData, stopTimer, loseGame, selectSquare, startTimer } = this.props;
+        if (!timerUpdateInterval) timerUpdateInterval = startTimer();
         var toks = ev.target.id.split("-");
         var x = parseInt(toks[0]);
         var y = parseInt(toks[1]);
-        if (this.props.gameData[y][x].mine) {
-            this.props.stopTimer();
-            this.props.loseGame();
+        if (!gameData[y][x].hidden || gameData[y][x].flag) return;
+        if (gameData[y][x].mine) {
+            stopTimer();
+            loseGame();
         }
-        else this.props.selectSquare(x,y);
+        else selectSquare(x,y);
+    }
+    handleFlagSquare (ev) {
+        const { flagSquare, startTimer } = this.props;
+        if (!timerUpdateInterval) timerUpdateInterval = startTimer();
+        var toks = ev.target.id.split("-");
+        var x = parseInt(toks[0]);
+        var y = parseInt(toks[1]);
+        flagSquare(x,y);
+        ev.preventDefault();
     }
     render () {
-        const {gameData, gameReady, gameStatus, timerActive, updateTimer} = this.props;
-        const handleSelectSquare = this.handleSelectSquare;
+        var {gameData, gameReady, gameStatus, timerActive, updateTimer,  stopTimer} = this.props;
+        const {handleSelectSquare, handleFlagSquare} = this;
+
+        timerActive = timerActive || (gameStatus == 0);
+
         if (timerActive && !timerUpdateInterval) {
             console.log("started");
             timerUpdateInterval = setInterval(updateTimer, 100);
@@ -31,6 +54,7 @@ class Game extends React.Component {
             clearInterval(timerUpdateInterval);
             timerUpdateInterval = false;
         }
+
         return (
             <div className={"gameCont card " + (gameReady ? "front" : "back")}>
                 <table style={{
@@ -41,9 +65,14 @@ class Game extends React.Component {
                         return (
                             <tr key={rowNum}>
                                 {row.map((node) => {
+                                    var curColor = (node.mine ? "red" : getNumberColor(node.numNear));
                                     return (
-                                        <td onClick={gameStatus ? handleSelectSquare : null} className={(node.hidden) ? ("hidden " + (gameStatus ? "hover" : "")) : ""} id={node.x + "-" + node.y} key={node.x + "-" + node.y}>
-                                            {node.hidden ? (node.flag ? "⚐" : " ") : (node.mine ? "⦻" : node.numNear)}
+                                        <td onClick={gameStatus == 0 ? handleSelectSquare : null}
+                                            onContextMenu={gameStatus == 0 ? handleFlagSquare : null}
+                                            style={node.hidden ? null : node.mine ? ((node.hidden || gameStatus == 1) ? null : {backgroundColor:curColor}) : {color:curColor}}
+                                            className={(node.hidden) ? ("hidden " + ((gameStatus == 0) ? "hover" : "")) : ""}
+                                            id={node.x + "-" + node.y} key={node.x + "-" + node.y}>
+                                                {node.hidden ? (node.flag ? FLAG_CHAR : " ") : (node.mine ? ((gameStatus == -1) ? MINE_CHAR: FLAG_CHAR) : ((node.numNear > 0) ? node.numNear : " "))}
                                         </td>
                                     );
                                 })}
@@ -68,8 +97,9 @@ Game.propTypes = {
         )
     ),
     gameReady: PropTypes.bool.isRequired,
-    gameStatus: PropTypes.bool.isRequired,
+    gameStatus: PropTypes.number.isRequired,
     selectSquare: PropTypes.func.isRequired,
+    flagSquare: PropTypes.func.isRequired,
     loseGame: PropTypes.func.isRequired,
     startTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,

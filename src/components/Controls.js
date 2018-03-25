@@ -35,7 +35,7 @@ class Controls extends React.Component {
                 <div className="controlRow padded">
                     <p name="submit">{gameStatusMessage}</p>
                 </div>
-                {gameStatus ?
+                {gameStatus == 0 ?
                     <div className="controlRow">
                         <div className="setupInputCont">
                             <p onClick={this.giveUpHandler} className="submitInput">give up</p>
@@ -54,7 +54,7 @@ class Controls extends React.Component {
 }
 
 Controls.propTypes = {
-    gameStatus: PropTypes.bool.isRequired,
+    gameStatus: PropTypes.number.isRequired,
     gameStatusMessage: PropTypes.string.isRequired,
     newGame: PropTypes.func.isRequired,
     loseGame: PropTypes.func.isRequired,
