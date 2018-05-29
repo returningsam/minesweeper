@@ -5,6 +5,7 @@ Minesweeper created with React/Redux.
 Current features:
  - Sound Effects
  - Resizable game board
+ 
 Upcoming features:
  - Score board
  - Animations
